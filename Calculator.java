@@ -1,6 +1,6 @@
 package calculator;
 
-
+GIT TEST
 public class Calculator {
 	private final AbstractValueParser valueParser;
 
