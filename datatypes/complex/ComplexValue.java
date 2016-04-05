@@ -2,7 +2,7 @@ package calculator.datatypes.complex;
 
 import calculator.AbstractValue;
 import calculator.DivisionByZeroException;
-import calculator.datatypes.real.RealValue;
+// import calculator.datatypes.real.RealValue;
 
 
 public class ComplexValue extends AbstractValue{
@@ -15,10 +15,11 @@ public class ComplexValue extends AbstractValue{
 		this.im = im;
 	}
 
-	public double GetRe() {return this.re;}
+	public double getRe() {return this.re;}
+	public double getIm() {return this.im;}
 	
 	public String toString() {
-		return Double.toString(re + '+'+ im + 'i');
+		return (re + " + i " + im);
 	}
 
 	public AbstractValue add(AbstractValue operand) {
@@ -37,27 +38,26 @@ public class ComplexValue extends AbstractValue{
 		return new ComplexValue(
 				re * ((ComplexValue) operand).re - 
 				im * ((ComplexValue) operand).im,
-				im + ((ComplexValue) operand).re +
+				im * ((ComplexValue) operand).re +
 				re * ((ComplexValue) operand).im
 				);
 	}
 
 	public AbstractValue div(AbstractValue operand)
 			throws DivisionByZeroException {
-		ComplexValue Value = new ComplexValue(
-				(re * ((ComplexValue) operand).re +
-				im + ((ComplexValue) operand).im)/
-				(((ComplexValue) operand).re*((ComplexValue) operand).re +
-						((ComplexValue) operand).im*((ComplexValue) operand).im),
-				(im * ((ComplexValue) operand).re - 
-				re * ((ComplexValue) operand).im)/
-				(((ComplexValue) operand).re*((ComplexValue) operand).re +
-						((ComplexValue) operand).im*((ComplexValue) operand).im)
-				);
-		double reValue = Value.re;
-		double imValue = Value.im;
-		if (reValue == 0.0 & imValue == 0.0)
+		
+		double reValue = ((ComplexValue) operand).getRe();
+		double imValue = ((ComplexValue) operand).getIm();
+		if (reValue == 0.0 && imValue == 0.0)
 			throw new DivisionByZeroException();
+		
+		ComplexValue Value = new ComplexValue(
+				(re * reValue + im * imValue)/
+					(reValue*reValue + imValue*imValue),
+				(im * reValue - re * imValue)/
+					(reValue*reValue + imValue*imValue)
+				);
+		
 		return Value;
 	}
 
