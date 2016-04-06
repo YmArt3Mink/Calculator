@@ -20,7 +20,7 @@ public class Program {
 	public Program() {
 		scanner = new Scanner(System.in);
 		valueParsers = new AbstractValueParser[] { new IntegerValueParser(),
-				new RealValueParser(),new ComplexValueParser(), new RationalValueParser() };
+				new RealValueParser(),new ComplexValueParser(), new RationalValueParser(), new VectorValueParser() };
 		AbstractValueParser parser = inputValueParser();
 		System.out.println("Работаем с типом '" + parser.getDatatypeName()
 				+ "'");
