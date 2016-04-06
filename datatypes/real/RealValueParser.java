@@ -9,7 +9,8 @@ public class RealValueParser implements AbstractValueParser {
 	public AbstractValue parse(String value) throws ParseValueException {
 		try {
 			return new RealValue(Double.parseDouble(value));
-		} catch (NumberFormatException exception) {
+		} catch (NumberFormatException exception) 
+		{
 			throw new ParseValueException();
 		}
 	}
